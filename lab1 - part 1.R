@@ -27,7 +27,46 @@ p1b_3
 
 
 library(scales)
-p4b <- p1b + geom_point(mapping = aes(x = gdpPercap, y = lifeExp)) +
+p1b_4 <- p1b + geom_point(mapping = aes(x = gdpPercap, y = lifeExp)) +
   geom_smooth((mapping = aes(x = gdpPercap, y = lifeExp)), method = "lm") +
   scale_x_log10(labels = scales::dollar)
-p4b
+p1b_4
+
+p1b_5 <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap, y = lifeExp, color = 'yellow'))
+p1b_5 + geom_point() + scale_x_log10()
+
+p1b_6 <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap, y = lifeExp, color = 'yellow'))
+p1b_6 + geom_point(aes(x = gdpPercap, y = lifeExp, color = 'yellow')) + scale_x_log10()
+
+
+p1_7 <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap, y = lifeExp))
+p1_7 + geom_point() + geom_smooth(color = "orange", se = FALSE, size = 8, method = "lm") + scale_x_log10()
+
+p1_8 <- p1_7 + geom_point(alpha = 0.3) +
+  geom_smooth(method = "gam") +
+  scale_x_log10(labels = scales::dollar) +
+  labs(x = "GDP Per Capita", y = "Life Expectancy in Years",
+       title = "Economic Growth and Life Expectancy",
+       subtitle = "Data Points are country-years",
+       caption = "Source: Gapminder")
+
+library(scales)
+p1_9 <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap, y = lifeExp, color = continent, fill = continent))
+p1_9 + geom_point()
+p1_9 + geom_point() + scale_x_log10(labels = dollar)
+p1_9 + geom_point() + scale_x_log10(labels = dollar) + geom_smooth()
+
+p1_10 <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap, y = lifeExp))
+p1_10 + geom_point(mapping = aes(color = continent)) + geom_smooth() + scale_x_log10()
+
+p1_11 <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap, y = lifeExp))
+p1_11 + geom_point(mapping = aes(color = continent)) +
+  geom_smooth(mapping = aes(color = continent, fill = continent)) +
+  scale_x_log10() +
+  geom_smooth(mapping = aes(color = continent), method = "gam")
