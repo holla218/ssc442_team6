@@ -3,36 +3,39 @@ library(ggplot2)
 library(ggthemr)
 
 setwd("C:/Users/tykra/OneDrive/Classes/Spring 2020/SSC 442/ssc442_team6")
-ggthemr("lilac")
+ggthemr("fresh")
 Bank_Data <- read.csv("bank.csv")
 
-Bank_Data$log_balance <- log(Bank_Data$balance)
+Bank_Data_agg <- count(Bank_Data, job, y)
+Bank_Data_agg_2 <- count(Bank_Data, job)
+Bank_Data_agg <- Bank_Data_agg[which(Bank_Data_agg$y=="yes"),]
+Bank_Data_agg$totals <- Bank_Data_agg_2$n
+Bank_Data_agg$percentage <- Bank_Data_agg$n/Bank_Data_agg$totals
+Bank_Data_agg$job <- with(Bank_Data_agg, reorder(job, percentage))
 
-Education_vs_LogBalance <- ggplot(Bank_Data, aes(x=education, y = log_balance))+
-  geom_boxplot()+
-  labs(title="Education vs Natural Log of Balance", x="Education", y= "Log Balance")+
-  theme(plot.title = element_text(size=35, hjust = 0.5), text=element_text(size=20))
-  
-ggsave("Education_vs_Log_Balance.png",
-       plot = Education_vs_LogBalance,
-       device = "png",
-       width = 10, height = 7,               
-       units = c("in"),
-       dpi = 600)
-
-Bank_Data_agg <- aggregate(Bank_Data$balance, list(Bank_Data$job), mean)
-Bank_Data_agg$Group.1 <- factor(Bank_Data_agg$Group.1, levels = Bank_Data_agg$Group.1[order(Bank_Data_agg$x)])
-Job_vs_Balance <- ggplot(Bank_Data_agg, aes(x = Group.1, y = x))+
+Job_vs_Success <- ggplot(Bank_Data_agg, aes(x = job, y = percentage))+
   geom_bar(stat="identity")+
-  labs(title="Job vs Balance", x="Job", y = "Balance")+
+  labs(title="Job vs Success", x="Job", y = "Success Rate")+
+  scale_y_continuous(limits=c(0,.25),
+                     breaks=c(0,0.05,0.10,0.15,0.2,0.25),
+                     labels=c("0%", "5%", "10%", "15%", "20%", "25%"))+
   coord_flip()+
   theme(plot.title = element_text(size=35, hjust=0.5), text=element_text(size=16))
   
-ggsave("Job_vs_Balance.png",
-         plot = Job_vs_Balance,
+ggsave("Job_vs_Success.png",
+         plot = Job_vs_Success,
          device = "png",
-         width = 10, height = 7,               
+         width = 10, height = 7,
          units = c("in"),
          dpi = 600)
-  
-  
+
+Day_vs_Success <- ggplot(Bank_Data, aes(x=day, fill = y))+
+  geom_histogram()
+
+Day_vs_Success
+ggsave("Day_vs_Success.png",
+       plot = Day_vs_Success,
+       device = "png",
+       width = 10, height = 7,
+       units = c("in"),
+       dpi = 600)
