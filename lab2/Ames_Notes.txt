@@ -1,0 +1,17 @@
+The Ames data set contains 15 variables: ID, LotArea, OverallQual, OverallCond, YearBuilt, X1stFlrSF, X2ndFlrSF, LowQualFinSF, BsmtFullBath, BsmtHalfBath, 
+GrLivArea, FullBath, BedroomAbvGr, BsmtFullBath, BsmtHalfBath, GarageCars, and SalePrice. I will go through and give a description of each one:
+ID: This is just to identify the specific property that the other columns are referring to.
+LotArea: This is a measure of the size of a given property given in square feet. This value should always be positive.
+OverallQual: This is a measure of the quality of a given property on a scale of 1-10 with 10 being the best and 1 being the worst.
+OverallCond: This is a measure of the condition the property is in on a scale of 1-10 with 10 being brand new and 1 being unlivable.
+YearBuilt: This is the year in which the house was built.
+X1stFlrSF: This is a measure of the square footage of the first floor of the house. Should always be positive.
+X2ndFlrSF: This is a measure of the square footage of the second floor of the house. Cannot be negative.
+LowQualFinSF: This might be a measure of the amount of low quality financing owners required to buy a given house. Never negative.
+GrLivArea: This appears to be a measure of the total square footage of the house. Always positive.
+FullBath: This is a measure of how many full bathrooms are in a house. No negatives.
+BedroomAbvGr: This is how many bedrooms are above the height of the garage. Cannot be negative.
+BsmtFullBath: This is a measure of how many full bathrooms are in the basement of a given property. Cannot be negative.
+BsmtHalfBath: This is a measure of how many half-bathrooms are in the basement of a given property. Cannot be negative.
+GarageCars: This is how many cars a garage can hold. No negatives.
+SalePrice: This is a measure of how much a property was sold for in US Dollars. All values are positive.
