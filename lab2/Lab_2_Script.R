@@ -48,8 +48,18 @@ ggplot(Ames, aes(x = GrLivArea, y = SalePrice))+
 # Biggest Outlier
 Ames[which(Ames$GrLivArea> 5000),]
 
-##Excersize 2
+##Part 2
 
+#try its
+attach(Ames)
+lm.fit = lm(SalePrice ~ GrLivArea)
+summary(lm.fit)
+plot(lm.fit)
+lm.fit_2 = lm(SalePrice ~ GrLivArea + LotArea)
+
+#Exercise 2 
+
+#controlling for garage type
 unique(ameslist$GarageType)
 GarageTemp = model.matrix( ~ GarageType - 1, data=ameslist )
 ameslist <- subset(ameslist, is.na(GarageType)==FALSE)
@@ -60,11 +70,33 @@ unique(ameslist$GarageOutside)
 
 Ames2 <- data.frame(cbind(ameslist$Id, ameslist$GarageOutside, ameslist$SalePrice))
 names(Ames2) <- c("ID", "GarageOutside", "SalePrice")
+#regression based on outdoor garage
+lm.fit_gar = lm(SalePrice ~ GarageOutside, data=Ames2)
+summary(lm.fit_gar)
 
-fit_e2_1 = lm(SalePrice ~ GarageOutside, data=Ames2)
-fit_e2_2 = lm(SalePrice ~ LotArea + OverallQual + OverallCond + 
-                YearBuilt + X1stFlrSF + X2ndFlrSF + LowQualFinSF + 
-                GrLivArea + FullBath + BedroomAbvGr + BsmtFullBath + 
-                BsmtHalfBath + GarageCars, data = Ames)
-summary(fit_e2_2)
+#multiple regression of all other variables in Ames
+lm.fit_full = lm(SalePrice ~., data=Ames)
+summary(lm.fit_full)
 
+plot(lm.fit_full)
+
+#interaction terms
+lm_1 = lm(SalePrice ~. +OverallQual:OverallCond, data=Ames)
+summary(lm_1)
+lm_2 = lm(SalePrice ~. +YearBuilt:OverallCond + OverallQual:OverallCond, data=Ames)
+summary(lm_2)
+lm_3 = lm(SalePrice ~. +YearBuilt:OverallCond + OverallQual:OverallCond + LotArea:X1stFlrSF:X2ndFlrSF, data=Ames)
+summary(lm_3)
+
+#transformations 
+lm_t1 = lm(log(SalePrice) ~., data=Ames)
+summary(lm_t1)
+plot(lm_t1)
+
+lm_t2 = lm(SalePrice**2 ~., data=Ames)
+summary(lm_t2)
+plot(lm_t2)
+
+lm_t3 = lm(sqrt(SalePrice) ~., data=Ames)
+summary(lm_t3)
+plot(lm_t3)
