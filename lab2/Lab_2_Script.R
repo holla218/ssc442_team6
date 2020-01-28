@@ -48,3 +48,23 @@ ggplot(Ames, aes(x = GrLivArea, y = SalePrice))+
 # Biggest Outlier
 Ames[which(Ames$GrLivArea> 5000),]
 
+##Excersize 2
+
+unique(ameslist$GarageType)
+GarageTemp = model.matrix( ~ GarageType - 1, data=ameslist )
+ameslist <- subset(ameslist, is.na(GarageType)==FALSE)
+ameslist <- cbind(ameslist, GarageTemp)
+
+ameslist$GarageOutside <- ifelse(ameslist$GarageTypeDetchd == 1 | ameslist$GarageTypeCarPort == 1, 1, 0)
+unique(ameslist$GarageOutside)
+
+Ames2 <- data.frame(cbind(ameslist$Id, ameslist$GarageOutside, ameslist$SalePrice))
+names(Ames2) <- c("ID", "GarageOutside", "SalePrice")
+
+fit_e2_1 = lm(SalePrice ~ GarageOutside, data=Ames2)
+fit_e2_2 = lm(SalePrice ~ LotArea + OverallQual + OverallCond + 
+                YearBuilt + X1stFlrSF + X2ndFlrSF + LowQualFinSF + 
+                GrLivArea + FullBath + BedroomAbvGr + BsmtFullBath + 
+                BsmtHalfBath + GarageCars, data = Ames)
+summary(fit_e2_2)
+
