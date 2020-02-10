@@ -8,7 +8,18 @@ Ames <- data[, ! names(data) %in% removed, drop = F]
 m <- Ames[, l]
 ifelse(n <- sapply(m, function(x) length(levels(x))) == 1, "DROP", "NODROP")
 
-fit_all = lm(SalePrice ~ ., data=Ames)##ERROR IS HERE
+fit_all = lm(SalePrice ~ MSSubClass + MSZoning + LotFrontage + LotArea + Street + LotShape + LandContour + LotConfig +
+            LandSlope + Neighborhood + Condition1 + Condition2 + BldgType + HouseStyle +
+            YearBuilt + YearRemodAdd + RoofStyle + RoofMatl + Exterior1st + Exterior2nd + 
+            MasVnrType + MasVnrArea + ExterQual + ExterCond + Foundation + BsmtQual + BsmtCond + 
+            BsmtExposure + BsmtFinType1 + BsmtFinSF1 + BsmtFinType2 + BsmtFinSF2 + BsmtUnfSF +
+          CentralAir + TotalBsmtSF + GarageCars +Heating +HeatingQC +Electrical + X1stFlrSF + X2ndFlrSF +
+            LowQualFinSF + GrLivArea + BsmtFullBath + BsmtHalfBath + FullBath + HalfBath + BedroomAbvGr +
+            KitchenAbvGr + KitchenQual + TotRmsAbvGrd + Functional + Fireplaces + FireplaceQu + GarageType +
+            GarageYrBlt + GarageFinish + GarageCars + GarageArea + GarageQual + GarageCond + PavedDrive +
+            WoodDeckSF + OpenPorchSF + EnclosedPorch + X3SsnPorch + ScreenPorch + PoolArea + MiscVal +
+            MoSold + YrSold + SaleType + SaleCondition, data=Ames)##ERROR IS HERE - can't do it with Factor w/ 2 levels variables
+
 summary(fit_all)
 
 fit_start = lm(SalePrice ~1, data=Ames) #intercept only
