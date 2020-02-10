@@ -13,13 +13,13 @@ fit_all = lm(SalePrice ~ MSSubClass + MSZoning + LotFrontage + LotArea + Street 
             YearBuilt + YearRemodAdd + RoofStyle + RoofMatl + Exterior1st + Exterior2nd + 
             MasVnrType + MasVnrArea + ExterQual + ExterCond + Foundation + BsmtQual + BsmtCond + 
             BsmtExposure + BsmtFinType1 + BsmtFinSF1 + BsmtFinType2 + BsmtFinSF2 + BsmtUnfSF +
-          CentralAir + TotalBsmtSF + GarageCars +Heating +HeatingQC +Electrical + X1stFlrSF + X2ndFlrSF +
+          TotalBsmtSF +Heating +HeatingQC + CentralAir +Electrical + X1stFlrSF + X2ndFlrSF +
             LowQualFinSF + GrLivArea + BsmtFullBath + BsmtHalfBath + FullBath + HalfBath + BedroomAbvGr +
             KitchenAbvGr + KitchenQual + TotRmsAbvGrd + Functional + Fireplaces + FireplaceQu + GarageType +
             GarageYrBlt + GarageFinish + GarageCars + GarageArea + GarageQual + GarageCond + PavedDrive +
             WoodDeckSF + OpenPorchSF + EnclosedPorch + X3SsnPorch + ScreenPorch + PoolArea + MiscVal +
-            MoSold + YrSold + SaleType + SaleCondition, data=Ames)##ERROR IS HERE - can't do it with Factor w/ 2 levels variables
-
+            MoSold + YrSold + SaleType + SaleCondition, data=Ames)
+# can't use alley, poolQC, Fence, MiscFeature variables in equation - these ones throw the error
 summary(fit_all)
 
 fit_start = lm(SalePrice ~1, data=Ames) #intercept only
