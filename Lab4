@@ -37,7 +37,7 @@ cv.glm(spam_trn, fit_caps, K = 5)$delta[1]
 cv.glm(spam_trn, fit_selected, K = 5)$delta[1]
 cv.glm(spam_trn, fit_additive, K = 5)$delta[1]
 cv.glm(spam_trn, fit_over, K = 5)$delta[1]
-#The most overfit was fit_caps, followed by fit+selected, followed by fit_ober, followed by fit_additive
+#The most underfit was fit_caps, followed by fit+selected, followed by fit_ober, followed by fit_additive
 
 #2
 
@@ -46,7 +46,7 @@ cv.glm(spam_trn, fit_caps, K = 100)$delta[1]
 cv.glm(spam_trn, fit_selected, K = 100)$delta[1]
 cv.glm(spam_trn, fit_additive, K = 100)$delta[1]
 cv.glm(spam_trn, fit_over, K = 100)$delta[1]
-#The most overfit was fit_caps, followed by fit_selected, followed by fit_over, followed by fit_additive
+#The most underfit was fit_caps, followed by fit_selected, followed by fit_over, followed by fit_additive
 #The conclusion does not change
 
 
