@@ -139,9 +139,10 @@ cv.glm(bank_trn, fit_additive, K = 10)$delta[1]
 cv.glm(bank_trn, fit_over, K = 10)$delta[1]
 
 
-bank_tst_pred = ifelse(predict(fit_additive, bank_tst) > 0,0,1)
-bank_tst_pred = ifelse(predict(fit_additive, bank_tst, type = "response") > 0.5,0,1)
+bank_tst_pred = ifelse(predict(fit_additive, bank_tst) > 0,1,0)
+bank_tst_pred = ifelse(predict(fit_additive, bank_tst, type = "response") > 0.5,1,0)
 
 (conf_mat_50 = make_conf_mat(predicted = bank_tst_pred, actual = bank_tst$Y))
 
 table(bank_tst$Y) / nrow(bank_tst)
+
