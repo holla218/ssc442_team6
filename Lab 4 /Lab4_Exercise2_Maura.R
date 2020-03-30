@@ -1,5 +1,6 @@
 ### Exercise 2
 library(tidyverse)
+
 bank <- read_csv("https://msudataanalytics.github.io/SSC442/Labs/data/bank.csv")
 
 set.seed(123)
