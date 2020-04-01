@@ -153,5 +153,7 @@ bank_tst_pred = ifelse(predict(fit_additive, bank_tst) > 0,"yes","no")
 bank_tst_pred = ifelse(predict(fit_additive, bank_tst, type = "response") > 0.5,"yes","no")
 (conf_mat_50 = make_conf_mat(predicted = bank_tst_pred, actual = bank_tst$y))
 
+
 table(bank_tst$y) / nrow(bank_tst)
+
 
